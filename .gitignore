@@ -3,3 +3,6 @@
 .cache
 compile_commands.json
 .DS_Store
+.vscode/
+cub3D
+raycast_test

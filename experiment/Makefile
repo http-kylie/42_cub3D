@@ -6,11 +6,11 @@
 #    By: kytan <kytan@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 08:37:12 by kecheong          #+#    #+#              #
-#    Updated: 2024/10/23 11:10:46 by kecheong         ###   ########.fr        #
+#    Updated: 2024/10/23 18:23:15 by kecheong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := cub3D
+NAME := raycast_test
 UNAME := $(shell uname)
 $(info $$(UNAME) = $(UNAME))
 
@@ -18,21 +18,21 @@ CC := cc
 CFLAGS := -Wall -Werror -Wextra
 
 ifeq ($(UNAME), Darwin)
-	MLX_dir := mlx_mac
+	MLX_dir := ../mlx_mac
 	MLX := $(MLX_dir)/libmlx.a
-	LDFLAGS := -Lmlx_mac
+	LDFLAGS := -L../mlx_mac
 	LDLIBS := -lmlx
-	includes := -Imlx_mac
+	includes := -I../mlx_mac
 	framework := -framework OpenGL -framework AppKit
 else
-	MLX_dir := mlx_linux
+	MLX_dir := ../mlx_linux
 	MLX := $(MLX_dir)/libmlx_Linux.a
-	LDFLAGS := -Lmlx_linux
+	LDFLAGS := -L../mlx_linux
 	LDLIBS := -lmlx_Linux -lXext -lX11 -lm -lz
-	includes := -Imlx_linux
+	includes := -I../mlx_linux
 endif
 
-srcs := test_mlx.c
+srcs := raycast_test.c
 obj_dir := obj
 objs := $(addprefix obj/, $(srcs:.c=.o))
 
@@ -43,7 +43,7 @@ $(MLX):
 	make -C $(MLX_dir)
 
 $(NAME): $(objs)
-	$(CC) $(CFLAGS) $(objs) $(includes) $(LDFLAGS) $(LDLIBS) $(framework)  -o $(NAME)
+	$(CC) $(CFLAGS) $(objs) $(includes) $(LDFLAGS) $(LDLIBS) $(framework) -o $(NAME)
 
 $(obj_dir):
 	mkdir -p $(obj_dir)
